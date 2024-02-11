@@ -1,9 +1,12 @@
 // Define a test suite for purchasing products
 describe('OSCommerce Product Purchase Tests', () => {
+    
     // Define a test case that covers purchasing different products with specific quantities
     it('TC1 and TC2 - Purchase different products with specific quantities', () => {
-      // Load the product data from the 'products' fixture
+      
+        // Load the product data from the 'products' fixture
       cy.fixture('products').then((data) => {
+        
         // Iterate over each product in the loaded fixture data
         data.products.forEach((product) =>  {
 
@@ -16,13 +19,19 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.contains(product.name).click();
 
             // Step 3: Add to Cart
-            // Close the pop-up at the bottom ir order to avoid double "Add to Basket" button
-            cy.get('.close').click();
-            // Click the "Add to Basket" button
+            // Close the pop-up at the bottom if it exists ir order to avoid duplicated "Add to Basket" buttons
+            cy.get('body').then($body => {
+                // Check if the popup's close button exists in the DOM
+                if ($body.find('.close').length > 0) {
+                    // If the close button exists, wait for it and click it to close the popup
+                    cy.get('.close', { timeout: 5000 }).click();
+                }
+                // If the close button does not exist, this block is skipped and no action is taken
+            });
+            // Click the "Add to Basket" button regardless of the popup's presence
             cy.get('#btn-cart > .add-to-cart').click();
             // Wait for the pop-up form to appear and assert conditions
-            cy.get('.pop-up-content', { timeout: 10000 }).should('be.visible').and('contain', 'Item');
-            
+            cy.get('.pop-up-content', { timeout: 5000 }).should('be.visible').and('contain', 'Item');
             
         });
     });
