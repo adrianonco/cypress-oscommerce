@@ -6,6 +6,9 @@ describe('OSCommerce Product Purchase Tests', () => {
       cy.fixture('products').then((data) => {
         // Iterate over each product in the loaded fixture data
         data.products.forEach((product) =>  {
+
+            // Step 1: Go to the specific website calling the custom command with the name of the fixture file
+            cy.navigateToUrl('urls');
         });
     });
   });
