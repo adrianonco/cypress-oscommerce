@@ -19,13 +19,11 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Close the pop-up at the bottom ir order to avoid double "Add to Basket" button
             cy.get('.close').click();
             // Click the "Add to Basket" button
-            // Click the 'Add to Basket' button that is shown in another pop-up
             cy.get('#btn-cart > .add-to-cart').click();
-            /*
+            // Wait for the pop-up form to appear and assert conditions
             cy.get('.pop-up-content', { timeout: 10000 }).should('be.visible').and('contain', 'Item');
-            // Wait for the pop-up form to appear as it has delay
-            cy.wait(6000);
-            */
+            
+            
         });
     });
   });
