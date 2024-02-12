@@ -34,6 +34,9 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.get('.pop-up-content', { timeout: 5000 }).should('be.visible').and('contain', 'Item');
             
             // Step 4: Update quantity of products
+            // Increase the product quantity to the required amount calling the custom command
+            cy.increaseProductQuantity(product.quantity);
+
         });
     });
   });
