@@ -7,5 +7,11 @@ module.exports = defineConfig({
     },
     // Enable experimental Studio
     experimentalStudio: true,
+
+    // Enable screenshots on test failures
+    screenshotOnRunFailure: true,
+
+    // Enable video recording of tests
+    video: true,
   },
 });

@@ -33,6 +33,7 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Wait for the pop-up form to appear and assert conditions
             cy.get('.pop-up-content', { timeout: 5000 }).should('be.visible').and('contain', 'Item');
             
+            // Step 4: Update quantity of products
         });
     });
   });
