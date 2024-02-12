@@ -33,9 +33,14 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Wait for the pop-up form to appear and assert conditions
             cy.get('.pop-up-content', { timeout: 5000 }).should('be.visible').and('contain', 'Item');
             
-            // Step 4: Update quantity of products
+            // Step 4: Update quantity of each product as requested
             // Increase the product quantity to the required amount calling the custom command
             cy.increaseProductQuantity(product.quantity);
+
+            // Step 5: Assert the quantity of each product 
+            // Check if the value of the input field matches the expected quantity in the 'product's fixture 
+            cy.get('.qty > .qty-box > .qty-inp-s').should('have.value', `${product.quantity}`);
+            
 
         });
     });
