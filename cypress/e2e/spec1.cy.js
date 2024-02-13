@@ -42,8 +42,15 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.get('.qty > .qty-box > .qty-inp-s').should('have.value', `${product.quantity}`);
             
             // Step 6: Checkout
-            // Locate the 'Go to Cart' button and click it
-            cy.get('.right-buttons > .btn-2');
+            // Click the "Continue shopping" button to close the pop-up form
+            cy.get('#cart-form > .buttons > .left-buttons > .btn').click();
+            // Make the 'Shopping Cart' dropdown visible
+            // Changing the parent div and its display status from none to block
+            cy.get('#cart-box > div.cart-content').invoke('attr', 'style', 'display: block;');
+            // Click the 'Checkout' button
+            cy.get('.right-buttons > a.btn').click();
+            
+
 
         });
     });
