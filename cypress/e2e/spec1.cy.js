@@ -49,6 +49,12 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.get('#cart-box > div.cart-content').invoke('attr', 'style', 'display: block;');
             // Click the 'Checkout' button
             cy.get('.right-buttons > a.btn').click();
+
+            // Step 7: Select 'Cash on delivery' payment method
+            // Click the 'Continue as guest' button
+            cy.get('#box-1770 > .btn-2').click();
+            // Second: Click the radio button for 'Cash on delivery' payment method
+            cy.get('.payment_class_cod > .item-radio > label > input').click();
             
 
 
