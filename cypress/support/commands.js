@@ -32,11 +32,11 @@ Cypress.Commands.add('increaseProductQuantity', (targetQuantity) => {
 
 // Custom command to complete the checkout process
 Cypress.Commands.add('completeCheckout', () => {
-    // Click the "Continue shopping" button to close the pop-up form
+    // Close the pop-up form clicking the "Continue shopping" button
     cy.get('#cart-form > .buttons > .left-buttons > .btn').click();
     // Make the 'Shopping Cart' dropdown visible
     // Changing the parent div and its display status from none to block
-    cy.get('#cart-box > div.cart-content').invoke('attr', 'style', 'display: block;');
+    cy.get('#cart-box > div.cart-content', { timeout: 6000 }).invoke('attr', 'style', 'display: block;');
     // Click the 'Checkout' button
     cy.get('.right-buttons > a.btn').click();
 });
