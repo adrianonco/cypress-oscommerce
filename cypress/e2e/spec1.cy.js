@@ -45,8 +45,8 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Step 8: Complete the payment
             // Load the user details from the fixture
             cy.fixture('users').then((userDetails) => {
-            // Use the custom command to fill in the payment form
-            cy.fillPaymentForm(userDetails);
+                // Use the custom command to fill in the payment form
+                cy.fillPaymentForm(userDetails);
             });
 
             // Step 9: Check the sucess message is shown
@@ -64,4 +64,31 @@ describe('OSCommerce Product Purchase Tests', () => {
         });
     });
   });
+
+  it('TC3 - Check incorrect order confirmation message', () => {
+    
+    cy.fixture('products').then((data) => {
+
+      // Using the firs product of 'products' fixture
+      const product = data.products[0]; 
+  
+      // Reuse steps for completing the process
+      cy.navigateToUrl('urls');
+      cy.contains(product.name).click();
+      cy.closePopupIfPresent();
+      cy.get('#btn-cart > .add-to-cart').click();
+      cy.get('.pop-up-content', { timeout: 5000 }).should('be.visible').and('contain', 'Item');
+      cy.increaseProductQuantity(product.quantity);
+      cy.get('.qty > .qty-box > .qty-inp-s').should('have.value', `${product.quantity}`);
+      cy.completeCheckout();
+      cy.selectPaymentMethod();
+      cy.fixture('users').then((userDetails) => {
+        cy.fillPaymentForm(userDetails);
+      });
+      cy.get('#box-31798 > .btn-2').click();
+  
+      // The diverging step for TC3: checking for the incorrect message
+      cy.contains("Your order has processed", { timeout: 5000 }).should('be.visible');
+  });
+});
 })
