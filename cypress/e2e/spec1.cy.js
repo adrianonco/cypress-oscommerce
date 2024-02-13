@@ -56,8 +56,12 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Second: Click the radio button for 'Cash on delivery' payment method
             cy.get('.payment_class_cod > .item-radio > label > input').click();
             
-
-
+            // Step 8: Complete the payment
+            // Load the user details from the fixture
+            cy.fixture('users').then((userDetails) => {
+            // Use the custom command to fill in the payment form
+            cy.fillPaymentForm(userDetails);
+            });
         });
     });
   });

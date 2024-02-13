@@ -1,9 +1,7 @@
 // Custom command to navigate to a URl specified in a fixture file
 Cypress.Commands.add('navigateToUrl', (fixturePath) => {
-    
     // Load the fixture file of the fixturePath argument
     cy.fixture(fixturePath).then((urls) => {
-        
         // Visit the URL defined in the fixture
         cy.visit(urls.baseUrl);
     });
@@ -19,5 +17,22 @@ Cypress.Commands.add('increaseProductQuantity', (targetQuantity) => {
       cy.get('.qty > .qty-box > .bigger').click();
     }
   });
-  
+
+// Custom command to fill the payment form using the 'users' fixture file
+Cypress.Commands.add('fillPaymentForm', (users) => {
+    // Fill in the first name
+    cy.get('#shipping_address-firstname').type(users.firstName);
+    // Fill in the surname
+    cy.get('#shipping_address-lastname').type(users.lastName);
+    // Fill in the street address
+    cy.get('#shipping_address-street_address').type(users.streetAddress);
+    // Fill in the post code
+    cy.get('#shipping_address-postcode').type(users.postcode);
+    // Fill in the city
+    cy.get('#shipping_address-city').type(users.city);
+    // Fill in the email address
+    cy.get('#checkout-email_address').type(users.email);
+    // Click to confirm the Terms
+    cy.get('#checkout-terms').click();
+  });
   
