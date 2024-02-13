@@ -68,6 +68,13 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.get('#box-31798 > .btn-2').click();
             // Wait for the confirmation message to appear and assert the its content
             cy.contains("We've received your order", { timeout: 10000 }).should('be.visible');
+
+            // Additional Step: Simulate session closure and restart so all test cases can run isolated within a same 'it'
+            // Simulate closing the session
+            cy.clearCookies();
+            cy.clearLocalStorage();
+            // Reload the current page
+            cy.reload();
         });
     });
   });
