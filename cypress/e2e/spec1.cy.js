@@ -39,10 +39,8 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.completeCheckout();
 
             // Step 7: Select 'Cash on delivery' payment method
-            // Click the 'Continue as guest' button
-            cy.get('#box-1770 > .btn-2').click();
-            // Click the radio button for 'Cash on delivery' payment method
-            cy.get('.payment_class_cod > .item-radio > label > input').click();
+            // Select the payment method calling the custom command
+            cy.selectPaymentMethod();
             
             // Step 8: Complete the payment
             // Load the user details from the fixture

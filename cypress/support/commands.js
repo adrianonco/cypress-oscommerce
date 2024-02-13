@@ -41,6 +41,14 @@ Cypress.Commands.add('completeCheckout', () => {
     cy.get('.right-buttons > a.btn').click();
 });
 
+// Custom command to select payment method
+Cypress.Commands.add('selectPaymentMethod', (paymentMethod) => {
+    // Click the 'Continue as guest' button
+    cy.get('#box-1770 > .btn-2').click();
+    // Click the radio button for 'Cash on delivery' payment method
+    cy.get('.payment_class_cod > .item-radio > label > input').click();
+});
+
 // Custom command to fill the payment form using the 'users' fixture file
 Cypress.Commands.add('fillPaymentForm', (users) => {
     // Fill in the first name
