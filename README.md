@@ -64,4 +64,4 @@ Feel free to fork the repository and submit pull requests with enhancements or f
 
 ## License
 
-GNU GENERAL PUBLIC LICENSE
+GNU GENERAL PUBLIC LICENSE.
