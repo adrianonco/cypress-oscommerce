@@ -19,15 +19,8 @@ describe('OSCommerce Product Purchase Tests', () => {
             cy.contains(product.name).click();
 
             // Step 3: Add to Cart
-            // Close the pop-up at the bottom if it exists ir order to avoid duplicated "Add to Basket" buttons
-            cy.get('body').then($body => {
-                // Check if the popup's close button exists in the DOM
-                if ($body.find('.close').length > 0) {
-                    // If the close button exists, wait for it and click it to close the popup
-                    cy.get('.close', { timeout: 5000 }).click();
-                }
-                // If the close button does not exist, this block is skipped and no action is taken
-            });
+            // Close the pop-up at the bottom if present calling the custom commandd
+            cy.closePopupIfPresent();
             // Click the "Add to Basket" button regardless of the popup's presence
             cy.get('#btn-cart > .add-to-cart').click();
             // Wait for the pop-up form to appear and assert conditions

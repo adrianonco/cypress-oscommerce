@@ -7,6 +7,18 @@ Cypress.Commands.add('navigateToUrl', (fixturePath) => {
     });
   }); 
 
+// Custom command to close the pop-up at the bottom if present in order to avoid duplicated 'Add to Basket' buttons
+Cypress.Commands.add('closePopupIfPresent', () => {
+    cy.get('body').then($body => {
+    // Check if the popup's close button exists in the DOM
+    if ($body.find('.close').length > 0) {
+        // If the close button exists, wait for it and click it to close the popup
+        cy.get('.close', { timeout: 5000 }).click();
+    }
+    // If the close button does not exist, this block is skipped and no action is taken
+    });
+})
+
 // Custom command to increase product quantity by clicking the increase button
 Cypress.Commands.add('increaseProductQuantity', (targetQuantity) => {
     // Assuming the initial quantity is always 1, calculate the number of additional clicks needed
