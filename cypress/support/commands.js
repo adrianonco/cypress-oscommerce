@@ -32,6 +32,8 @@ Cypress.Commands.add('fillPaymentForm', (users) => {
     cy.get('#shipping_address-city').type(users.city);
     // Fill in the email address
     cy.get('#checkout-email_address').type(users.email);
+    // Click again the 'Cash on delivery' radio button as it jumps
+    cy.get('.payment_class_cod > .item-radio > label > input').click();
     // Click to confirm the Terms
     cy.get('#checkout-terms').click();
   });

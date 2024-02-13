@@ -53,7 +53,7 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Step 7: Select 'Cash on delivery' payment method
             // Click the 'Continue as guest' button
             cy.get('#box-1770 > .btn-2').click();
-            // Second: Click the radio button for 'Cash on delivery' payment method
+            // Click the radio button for 'Cash on delivery' payment method
             cy.get('.payment_class_cod > .item-radio > label > input').click();
             
             // Step 8: Complete the payment
@@ -62,6 +62,12 @@ describe('OSCommerce Product Purchase Tests', () => {
             // Use the custom command to fill in the payment form
             cy.fillPaymentForm(userDetails);
             });
+
+            // Step 9: Check the sucess message is shown
+            // Click the 'Confirm and pay' button
+            cy.get('#box-31798 > .btn-2').click();
+            // Wait for the confirmation message to appear and assert the its content
+            cy.contains("We've received your order", { timeout: 10000 }).should('be.visible');
         });
     });
   });
